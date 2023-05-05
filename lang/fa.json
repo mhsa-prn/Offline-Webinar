@@ -17,8 +17,8 @@
     "Confirm Password": "تایید رمز عبور",
     "Verify Your Email Address": "ایمیل خود را تایید کنید",
     "A fresh verification link has been sent to your email address.": "یک لینک فعال سازی جدید به ادرس ایمیل شما ارسال شد.",
-    "Before proceeding, please check your email for a verification link.": "قبل از ادامه دادن لطفا ایمیل خود را برای فعال سازی حسابتان برسی کنید.",
-    "If you did not receive the email": "اگه ایمیلی دریافت نکرده اید",
+    "Before proceeding, please check your email for a verification link.": "قبل از ادامه دادن لطفا ایمیل خود را برای فعال سازی حسابتان بررسی کنید.",
+    "If you did not receive the email": "اگر ایمیلی دریافت نکرده اید",
     "click here to request another": "برای درخواست لینک جدید اینجا کلیک کنید",
     "Please confirm your password before continuing.": "لطفا برای ادامه رمز عبور خود را تایید کنید",
     "Send Password Reset Link": "ارسال لینک بازیابی رمز عبور",
@@ -134,5 +134,6 @@
     "The :attribute must be at least :length characters and contain at least one special character.": "فیلد :attribute باید حداقل :length کاراکتر و شامل یک کاراکتر مخصوص باشد.",
     "The :attribute must be at least :length characters and contain at least one uppercase character and one special character.": "فیلد :attribute باید حداقل :length کاراکتر و شامل یک کاراکتر مخصوص و یک حرف بزرگ باشد.",
     "The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.": "فیلد :attribute باید حداقل :length کاراکتر، یک کاراکتر مخصوص، یک حرف بزرگ و یک عدد باشد.",
-    "Email Address": "آدرس ایمیل"
+    "Email Address": "آدرس ایمیل",
+    "You are logged in!": "وارد شدید!"
 }
