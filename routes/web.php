@@ -22,3 +22,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('getCode',[\App\Http\Controllers\Auth\AuthController::class,'getCode'])->name('getCode');
+
+Route::get('getCode',[\App\Http\Controllers\Auth\AuthController::class,'getCodePage'])->name('getCodePage');
+
+Route::post('login',[\App\Http\Controllers\Auth\AuthController::class,'login'])->name('login');

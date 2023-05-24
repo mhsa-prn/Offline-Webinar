@@ -8,7 +8,7 @@
     <title>{{$title}}</title>
 </head>
 <body>
-<h1>{{$title}}</h1>
-<h3>{{$code}}</h3>
+<h3>{{$title}}</h3>
+<h5>{{$code}}</h5>
 </body>
 </html>
