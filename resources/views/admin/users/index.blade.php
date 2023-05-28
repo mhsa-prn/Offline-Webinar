@@ -38,7 +38,7 @@
                                     @csrf
                                     @method('delete')
                                 </form>
-                                <a href="#" onclick="event.preventDefault();document.getElementById('form-{{$user->id}}-delete').submit()" class="btn btn-sm btn-danger">حذف</a>
+                                <a href="#" onclick="event.preventDefault();askForDelete({{$user->id}})" class="btn btn-sm btn-danger">حذف</a>
                                 <a href="#" class="btn btn-sm btn-primary">ویرایش</a>
                             </td>
                         </tr>
@@ -49,4 +49,28 @@
             {{ $users->render() }}
         </div>
     </div>
+    @endsection
+
+@section('script')
+    <script>
+        function askForDelete(id){
+            Swal.fire({
+                title: '',
+                text: "آیا از حذف کاربر اطمینان دارید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر' ,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`form-${id}-delete`).submit();
+
+                }
+            })
+        }
+
+
+    </script>
     @endsection
