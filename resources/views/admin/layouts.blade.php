@@ -18,6 +18,7 @@
     <link href="/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="/css/Vazirmatn-font-face.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/fontawesome.min.css" rel="stylesheet">
 
 
     <!-- Favicons -->

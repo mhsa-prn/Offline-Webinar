@@ -25,8 +25,14 @@
                             <td> {{ $loop->index + 1 }}</td>
                             <td> {{ $user->name }}</td>
                             <td> {{ $user->email }}</td>
-                            <td> {{ $user->email_verified_at }}</td>
-                            <td> {{ $user->created_at }}</td>
+                            <td>
+                                @if ($user->email_verified_at)
+                                    <i class="fa-solid fa-check text-success"></i>
+                                    @else
+                                        <i class="fa-solid fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
+                            <td> {{ jdate($user->created_at)->format('Y-m-d') }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-danger">حذف</a>
                                 <a href="#" class="btn btn-sm btn-primary">ویرایش</a>
