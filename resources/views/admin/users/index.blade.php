@@ -34,7 +34,11 @@
                             </td>
                             <td> {{ jdate($user->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-danger">حذف</a>
+                                <form id="form-{{$user->id}}-delete" action="{{route('admin.users.destroy', $user->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                                <a href="#" onclick="event.preventDefault();document.getElementById('form-{{$user->id}}-delete').submit()" class="btn btn-sm btn-danger">حذف</a>
                                 <a href="#" class="btn btn-sm btn-primary">ویرایش</a>
                             </td>
                         </tr>
