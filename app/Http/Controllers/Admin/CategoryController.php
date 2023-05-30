@@ -29,4 +29,10 @@ class CategoryController extends Controller
         Category::create($request->all());
         return redirect(route('admin.categories.index'));
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return back();
+    }
 }
