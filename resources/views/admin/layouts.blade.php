@@ -187,9 +187,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.categories.index')}}">
                             <span data-feather="file" class="align-text-bottom"></span>
-                            Orders
+                            دسته بندی ها
                         </a>
                     </li>
                     <li class="nav-item">

@@ -13,4 +13,20 @@ class CategoryController extends Controller
         $categories = Category::latest()->paginate(10);
         return view('admin.categories.index',compact('categories'));
     }
+
+    public function create()
+    {
+        return view('admin.categories.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name'=>'required',
+            'parent_id'=>'nullable|exists:categories,id'
+        ]);
+
+        Category::create($request->all());
+        return redirect(route('admin.categories.index'));
+    }
 }
