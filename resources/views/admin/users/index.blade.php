@@ -5,6 +5,22 @@
 
 @section('content')
 <h3 class="my-3">لیست کاربران</h3>
+<div class="row">
+    <div class="col mb-3">
+        <form action="{{ route('admin.users.index') }}" method="get">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="search" placeholder="جستجو">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary"> فیلتر</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
     <div class="row">
         <div class="col">
             <div class="table-responsive">
@@ -39,14 +55,14 @@
                                     @method('delete')
                                 </form>
                                 <a href="#" onclick="event.preventDefault();askForDelete({{$user->id}})" class="btn btn-sm btn-danger">حذف</a>
-                                <a href="#" class="btn btn-sm btn-primary">ویرایش</a>
+                                <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            {{ $users->render() }}
+            {{ $users->appends(['search'=>request()->search]) }}
         </div>
     </div>
     @endsection
