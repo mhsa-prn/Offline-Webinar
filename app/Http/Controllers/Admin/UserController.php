@@ -13,9 +13,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
+
+
+        $key = $request->search;
+        if ($key){
+            $users = User::where('name','like',"%{$key}%")
+                ->orWhere('email','like',"%{$key}%")->paginate(10);
+        }
+        else {
+            $users = User::latest()->paginate(10);
+        }
         return view('admin.users.index', compact ('users'));
     }
 
@@ -59,7 +68,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -67,11 +76,17 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $user->update($request->all());
+
+        return redirect(route('admin.users.index'));
     }
 
     /**
