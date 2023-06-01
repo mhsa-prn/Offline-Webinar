@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
+            'name'=>'required|unique:categories,names',
             'parent_id'=>'nullable|exists:categories,id'
         ]);
 
@@ -34,5 +35,21 @@ class CategoryController extends Controller
     {
         $category->delete();
         return back();
+    }
+
+    public function edit(Category $category)
+    {
+        return view('admin.categories.update',compact('category'));
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'name'=>['required',Rule::unique('categories','name')->ignore($category->id)],
+            'parent_id'=>'nullable|exists:categories,id'
+        ]);
+
+        $category->update($request->all());
+        return redirect(route('admin.categories.index'));
     }
 }
