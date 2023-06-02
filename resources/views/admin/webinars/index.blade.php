@@ -1,10 +1,11 @@
 @extends('admin.layouts')
 @section('title')
-    لیست کاربران
+    لیست وبینارها
     @endsection
 
 @section('content')
 <h3 class="my-3">لیست وبینارها</h3>
+<a class="btn btn-primary btn-sm float-end" href="{{route('admin.webinars.create')}}">افزودن وبینار</a>
 <div class="row">
     <div class="col mb-3">
         <form action="{{ route('admin.users.index') }}" method="get">
