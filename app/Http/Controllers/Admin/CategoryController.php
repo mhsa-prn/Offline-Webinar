@@ -11,7 +11,17 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::latest()->paginate(10);
+        $key = $request->search;
+
+        if($key){
+            $ids=$categories=Category::where('name','like',"%{$key}%")->get('id');
+            $categories=Category::where('name','like',"%{$key}%")
+                ->orWhereIn('parent_id',$ids)
+                ->paginate(10);
+        }
+        else{
+            $categories = Category::latest()->paginate(10);
+        }
         return view('admin.categories.index',compact('categories'));
     }
 

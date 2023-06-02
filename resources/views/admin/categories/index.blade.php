@@ -8,7 +8,7 @@
 <a class="btn btn-primary btn-sm float-end" href="{{route('admin.categories.create')}}">افزودن دسته بندی</a>
 <div class="row">
     <div class="col mb-3">
-        <form action="{{ route('admin.users.index') }}" method="get">
+        <form action="{{ route('admin.categories.index') }}" method="get">
             <div class="form-group">
                 <div class="row">
                     <div class="col-9">
