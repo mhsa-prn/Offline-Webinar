@@ -4,7 +4,7 @@
     @endsection
 
 @section('content')
-<h3 class="my-3">لیست کاربران</h3>
+<h3 class="my-3">لیست وبینارها</h3>
 <div class="row">
     <div class="col mb-3">
         <form action="{{ route('admin.users.index') }}" method="get">
@@ -28,41 +28,39 @@
                     <thead>
                     <tr>
                         <th>ردیف</th>
-                        <th>نام</th>
-                        <th>ایمیل</th>
-                        <th>وضعیت ایمیل</th>
-                        <th>تاریخ ثبت نام</th>
+                        <th>عنوان</th>
+                        <th>سازنده</th>
+                        <th>قیمت</th>
+                        <th>عکس</th>
+                        <th>ویدئو</th>
+                        <th>تاریخ انتشار</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($webinars as $webinar)
                         <tr>
                             <td> {{ $loop->index + 1 }}</td>
-                            <td> {{ $user->name }}</td>
-                            <td> {{ $user->email }}</td>
+                            <td> {{ $webinar->title }}</td>
+                            <td> {{ $webinar->user->name }}</td>
+                            <td> {{ $webinar->price }}</td>
+                            <td> {{ $webinar->img }}</td>
+                            <td> {{ $webinar->video }}</td>
+                            <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                @if ($user->email_verified_at)
-                                    <i class="fa-solid fa-check text-success"></i>
-                                    @else
-                                        <i class="fa-solid fa-times-circle text-danger"></i>
-                                @endif
-                            </td>
-                            <td> {{ jdate($user->created_at)->format('Y-m-d') }}</td>
-                            <td>
-                                <form id="form-{{$user->id}}-delete" action="{{route('admin.users.destroy', $user->id)}}" method="post">
+                                <form id="form-{{$webinar->id}}-delete" action="{{route('admin.webinars.destroy', $webinar->id)}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>
-                                <a href="#" onclick="event.preventDefault();askForDelete({{$user->id}})" class="btn btn-sm btn-danger">حذف</a>
-                                <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
+                                <a href="#" onclick="event.preventDefault();askForDelete({{$webinar->id}})" class="btn btn-sm btn-danger">حذف</a>
+                                <a href="{{route('admin.webinars.edit',$webinar->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            {{ $users->appends(['search'=>request()->search]) }}
+            {{ $webinars->appends(['search'=>request()->search]) }}
         </div>
     </div>
     @endsection

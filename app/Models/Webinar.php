@@ -16,4 +16,9 @@ class Webinar extends Model
         'video',
         'img'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'creator_id');
+    }
 }
