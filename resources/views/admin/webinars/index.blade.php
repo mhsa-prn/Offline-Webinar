@@ -45,7 +45,7 @@
                             <td> {{ $webinar->title }}</td>
                             <td> {{ $webinar->user->name }}</td>
                             <td> {{ $webinar->price }}</td>
-                            <td> {{ $webinar->img }}</td>
+                            <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
                             <td> {{ $webinar->video }}</td>
                             <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>
                             <td>

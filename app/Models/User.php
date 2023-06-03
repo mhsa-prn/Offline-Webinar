@@ -29,6 +29,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Code::class);
     }
 
+    public function webinars()
+    {
+        return $this->hasMany(Webinar::class,'creator_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
