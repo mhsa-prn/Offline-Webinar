@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -32,6 +32,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function webinars()
     {
         return $this->hasMany(Webinar::class,'creator_id');
+    }
+
+    public function isAdmin()
+    {
+        //!! => age $this->is_admin null bashe false barmigardoone va age meghdar dashte bashe true
+        return !! $this->is_admin;
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Models\Code;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
@@ -71,8 +72,17 @@ class AuthController extends Controller
                 $user_code_expired_at > Carbon::now()){
             auth()->loginUsingId($user->id);
             $user->code()->delete();
+            if($user->isAdmin()){
+                return redirect(route('admin.users.index'));
+            }
             return redirect(route('home'));
         }
         return back()->with('error','کد وارد شده معتبر نمی باشد');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

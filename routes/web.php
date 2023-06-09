@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -26,3 +26,6 @@ Route::post('getCode',[\App\Http\Controllers\Auth\AuthController::class,'getCode
 Route::get('getCode',[\App\Http\Controllers\Auth\AuthController::class,'getCodePage'])->name('getCodePage');
 
 Route::post('login',[\App\Http\Controllers\Auth\AuthController::class,'login'])->name('login');
+Route::get('logout',[\App\Http\Controllers\Auth\AuthController::class,'logout'])->name('logout');
+
+Route::resource('webinars','WebinarController');
