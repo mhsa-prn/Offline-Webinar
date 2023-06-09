@@ -46,7 +46,7 @@
                             <td> {{ $webinar->user->name }}</td>
                             <td> {{ $webinar->price }}</td>
                             <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
-                            <td> {{ $webinar->video }}</td>
+                            <td> <a href="{{route('admin.webinars.download',$webinar->video)}}" class="btn btn-sm btn-primary">لینک دانلود</a></td>
                             <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>
                             <td>
                                 <form id="form-{{$webinar->id}}-delete" action="{{route('admin.webinars.destroy', $webinar->id)}}" method="post">

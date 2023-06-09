@@ -115,4 +115,9 @@ class WebinarController extends Controller
         $webinar->delete();
         return back();
     }
+
+    public function download($file)
+    {
+        return Storage::download('/videos/'.$file);
+    }
 }
