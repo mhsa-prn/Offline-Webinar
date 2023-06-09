@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Webinar;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -20,9 +22,21 @@ class WebinarController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $webinars=Webinar::latest()->paginate(10);
+
+
+        $key = $request->search;
+        if($key){
+            $ids=User::where('name','like',"%{$key}%")->get('id');
+            $webinars=Webinar::where('title','like',"%{$key}%")
+                ->orWhereIn('creator_id',$ids)
+                ->latest()->paginate(10);
+        }
+        else{
+            $webinars=Webinar::latest()->paginate(10);
+        }
+
         return view('admin.webinars.index',compact('webinars'));
     }
 

@@ -8,7 +8,7 @@
 <a class="btn btn-primary btn-sm float-end" href="{{route('admin.webinars.create')}}">افزودن وبینار</a>
 <div class="row">
     <div class="col mb-3">
-        <form action="{{ route('admin.users.index') }}" method="get">
+        <form action="{{ route('admin.webinars.index') }}" method="get">
             <div class="form-group">
                 <div class="row">
                     <div class="col-9">
