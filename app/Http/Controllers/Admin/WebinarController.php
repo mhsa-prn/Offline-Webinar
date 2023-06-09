@@ -102,7 +102,7 @@ class WebinarController extends Controller
      */
     public function edit(Webinar $webinar)
     {
-        return view('admin.webinars.edit',compact('webinar'));
+        return view('admin.webinars.update',compact('webinar'));
 
     }
 
@@ -111,11 +111,18 @@ class WebinarController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Webinar $webinar)
     {
-        //
+        $request->validate([
+            'title'=>'required|min:5|max:50',
+            'description'=>'required|min:10|max:1000',
+            'price'=>'required|numeric|min:0|max:10000000',
+        ]);
+
+        $webinar->update($request->all());
+        return redirect(route('admin.webinars.index'));
     }
 
     /**

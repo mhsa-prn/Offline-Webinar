@@ -5,14 +5,14 @@
 
 @section('content')
     <div class="row">
-        <div class="col">
+        <div class="col my-3">
             <form action="{{route('admin.users.update', $user->id)}}" method="post">
                 @csrf
                 @method('patch')
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col">
+                        <div class="col my-3">
                             <label>نام</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}}">
                             @error('name')
@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col">
+                        <div class="col my-3">
                             <label>ایمیل</label>
                             <input type="text" class="form-control" disabled value="{{$user->email}}">
                         </div>
@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col">
+                        <div class="col my-3">
                             <button class="btn btn-sm btn-primary" type="submit">بروزرسانی</button>
                         </div>
                     </div>
