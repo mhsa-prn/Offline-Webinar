@@ -29,3 +29,6 @@ Route::post('login',[\App\Http\Controllers\Auth\AuthController::class,'login'])-
 Route::get('logout',[\App\Http\Controllers\Auth\AuthController::class,'logout'])->name('logout');
 
 Route::resource('webinars','WebinarController');
+
+//Route::get('/payment/pay','PaymentController@pay')->name('payment.pay');
+//Route::get('/payment/verify','PaymentController@verify')->name('payment.verify');

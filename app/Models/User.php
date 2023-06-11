@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Webinar::class,'creator_id');
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function isAdmin()
     {
         //!! => age $this->is_admin null bashe false barmigardoone va age meghdar dashte bashe true

@@ -14,11 +14,17 @@ class Webinar extends Model
         'description',
         'price',
         'video',
-        'img'
+        'img',
+        'confirmed'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class,'creator_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

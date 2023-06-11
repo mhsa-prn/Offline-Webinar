@@ -74,7 +74,8 @@ class WebinarController extends Controller
             'description'=>$request->description,
             'price'=>$request->price,
             'img'=>$image_name,
-            'video'=> $video_name
+            'video'=> $video_name,
+            'confirmed' => 1
         ]);
 
         Storage::disk('public')->putFileAs('images',$request->file('img'),$image_name);
