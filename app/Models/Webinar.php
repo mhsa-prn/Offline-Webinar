@@ -23,6 +23,11 @@ class Webinar extends Model
         return $this->belongsTo(User::class,'creator_id');
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);

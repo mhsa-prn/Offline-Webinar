@@ -114,4 +114,10 @@ class WebinarController extends Controller
             return Storage::download($request->path);
         }
     }
+
+    public function freeRegister(Webinar $webinar, Request $request)
+    {
+        $webinar->members()->sync($request->user()->id);
+        return back();
+    }
 }

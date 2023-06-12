@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Webinar::class,'creator_id');
     }
 
+    public function webinarsMember()
+    {
+        return $this->belongsToMany(Webinar::class);
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);

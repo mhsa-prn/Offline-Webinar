@@ -16,17 +16,18 @@ class PaymentController extends Controller
     public function pay(Request $request)
     {
         $webinar = Webinar::find($request->webinar);
-        if(!$webinar) return back()->with(['error'=>'وبینار مورد نظر وجود ندارد.']);
+        if (!$webinar) return back()->with(['error' => 'وبینار مورد نظر وجود ندارد.']);
 
-        $amount = Price::first()->amount;
+        $amount = !isset($request->for) ? Price::first()->amount : $webinar->price;
 
         return ShetabitPayment::purchase(
             (new Invoice)->amount($amount),
-            function($driver, $transactionId) use ($request, $webinar, $amount) {
+            function ($driver, $transactionId) use ($request, $webinar, $amount) {
                 $request->user()->payments()->create([
                     'webinar_id' => $webinar->id,
                     'amount' => $amount,
-                    'ref_num' => $transactionId
+                    'ref_num' => $transactionId,
+                    'forMemberSheep' => isset($request->for) ? true : false
                 ]);
             }
         )->pay()->render();
@@ -34,9 +35,9 @@ class PaymentController extends Controller
 
     public function verify(Request $request)
     {
-        $transaction_id=$request->Authority;
-        $payment = Payment::where('ref_num',$transaction_id)->first();
-        if(!$payment) throw new \Exception('وبینار پیدا نشد');
+        $transaction_id = $request->Authority;
+        $payment = Payment::where('ref_num', $transaction_id)->first();
+        if (!$payment) throw new \Exception('وبینار پیدا نشد');
         try {
             $receipt = ShetabitPayment::amount($payment->amount)->transactionId($transaction_id)->verify();
 
@@ -45,13 +46,24 @@ class PaymentController extends Controller
                 'status' => true
             ]);
             $webinar = Webinar::find($payment->webinar_id);
-            $webinar->update([
-               'confirmed' => true
-            ]);
-            return redirect(route('webinars.index'))->with(['success'=>'پرداخت شما با موفقیت انجام شد.']);
+
+            if ($payment->forMemberSheep) {
+                $webinar->members()->sync($request->user()->id);
+            } else {
+                $webinar->update([
+                    'confirmed' => true
+                ]);
+            }
+
+
+            if ($payment->forMemberSheep) {
+                return redirect(route('webinars.show',$webinar->id));
+            }
+
+            return redirect(route('webinars.index'))->with(['success' => 'پرداخت شما با موفقیت انجام شد.']);
 
         } catch (InvalidPaymentException $exception) {
-            return redirect(route('webinars.index'))->with(['error'=>$exception->getMessage()]);
+            return redirect(route('webinars.index'))->with(['error' => $exception->getMessage()]);
         }
     }
 }

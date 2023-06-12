@@ -9,12 +9,14 @@ class Payment extends Model
 {
     use HasFactory;
     protected $fillable =[
-      'user_id',
-      'webinar_id',
-      'amount',
-      'status',
-      'ref_num',
-      'res_num'
+        'user_id',
+        'webinar_id',
+        'amount',
+        'status',
+        'ref_num',
+        'res_num',
+        'forMemberSheep',
+
     ];
 
     public function user()

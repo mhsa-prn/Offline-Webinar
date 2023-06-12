@@ -33,4 +33,6 @@ Route::get('/payment/verify','PaymentController@verify')->name('payment.verify')
 
 Route::get('/webinar/download/{user}','WebinarController@download')->name('webinars.download')->middleware('signed');
 
+Route::get('webinar/{webinar}', 'WebinarController@freeRegister')->name('webinar.free.register');
+
 

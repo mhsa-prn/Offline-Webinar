@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+        Schema::create('user_webinar', function (Blueprint $table) {
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->foreignIdFor(\App\Models\Webinar::class)->constrained();
-            $table->integer('amount');
-            $table->boolean('status')->default(false);
-            $table->string('ref_num');
-            $table->string('res_num')->nullable();
-            $table->boolean('forMemberSheep')->default(false);
-            $table->timestamps();
+            $table->primary(['user_id','webinar_id']);
         });
     }
 
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('user_webinar');
     }
 };
