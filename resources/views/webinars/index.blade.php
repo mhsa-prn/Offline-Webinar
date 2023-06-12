@@ -56,10 +56,14 @@
                             </td>
                             <td> {{ $webinar->price }}</td>
                             <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
-                            <td> <a href="{{route('admin.webinars.download',$webinar->video)}}" class="btn btn-sm btn-primary">لینک دانلود</a></td>
+                            <td> <a
+                                    href="{{URL::temporarySignedRoute(
+    'webinars.download', now()->addMinutes(30), ['user'=>auth()->id(),'path'=>"/videos/{$webinar->video}"]
+);}}"
+                                    class="btn btn-sm btn-primary">لینک دانلود</a></td>
                             <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <form id="form-{{$webinar->id}}-delete" action="{{route('admin.webinars.destroy', $webinar->id)}}" method="post">
+                                <form id="form-{{$webinar->id}}-delete" action="{{route('webinars.destroy', $webinar->id)}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>

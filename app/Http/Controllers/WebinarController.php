@@ -107,4 +107,11 @@ class WebinarController extends Controller
     {
         //
     }
+
+    public function download(Request $request)
+    {
+        if ($request->user == auth()->id()){
+            return Storage::download($request->path);
+        }
+    }
 }
