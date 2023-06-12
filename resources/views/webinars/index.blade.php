@@ -36,7 +36,7 @@
                                 @if($webinar->confirmed)
                                     <span class="text-success">پرداخت شده</span>
                                 @else
-                                    <a href="" class="btn btn-warning btn-sm">لینک پرداخت</a>
+                                    <a href="{{route('payment.pay',$webinar->id)}}" class="btn btn-warning btn-sm">لینک پرداخت</a>
                                 @endif
                             </td>
                             <td> {{ $webinar->price }}</td>

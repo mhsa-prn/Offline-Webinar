@@ -30,5 +30,5 @@ Route::get('logout',[\App\Http\Controllers\Auth\AuthController::class,'logout'])
 
 Route::resource('webinars','WebinarController');
 
-//Route::get('/payment/pay','PaymentController@pay')->name('payment.pay');
-//Route::get('/payment/verify','PaymentController@verify')->name('payment.verify');
+Route::get('/payment/pay/{webinar}','PaymentController@pay')->name('payment.pay');
+Route::get('/payment/verify','PaymentController@verify')->name('payment.verify');
