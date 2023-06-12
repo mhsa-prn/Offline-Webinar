@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Webinar;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function firstPage()
+    {
+        $webinars= Webinar::where('confirmed',1)->latest()->paginate(10);
+        return view('welcome',compact('webinars'));
     }
 }
