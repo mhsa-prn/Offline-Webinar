@@ -57,6 +57,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('webinars.index') }}">
+                                        وبینارهای ایجاد شده ی من
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('webinars.create') }}">
                                         ایجاد وبینار
                                     </a>
