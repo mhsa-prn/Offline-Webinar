@@ -14,6 +14,11 @@ use Shetabit\Payment\Facade\Payment as ShetabitPayment;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function pay(Request $request)
     {
         $webinar = Webinar::find($request->webinar);

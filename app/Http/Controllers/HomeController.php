@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth']);
+
     }
 
     /**
@@ -30,7 +30,14 @@ class HomeController extends Controller
 
     public function firstPage()
     {
-        $webinars= Webinar::where('confirmed',1)->latest()->paginate(10);
+        $key= request()->search;
+        if($key){
+            $webinars= Webinar::where('confirmed',1)->where('title','like',"%{$key}%")->latest()->paginate(10);
+        }
+        else{
+            $webinars= Webinar::where('confirmed',1)->latest()->paginate(10);
+        }
+
         return view('welcome',compact('webinars'));
     }
 }

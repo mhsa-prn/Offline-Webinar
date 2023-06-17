@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Pricing example · Bootstrap v5.2</title>
+    <title>وبینار دات آی آر</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
 
@@ -92,7 +92,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">وبینار آت آی آر</a>
+                <a class="navbar-brand" href="/">وبینار دات آی آر</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -104,6 +104,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/home">پروفایل</a>
                         </li>
+
 
                         @foreach(\App\Models\Category::where('parent_id',null)->get() as $category)
                             <li class="nav-item dropdown">

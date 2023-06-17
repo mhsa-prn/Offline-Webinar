@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col mb-3">
-        <h3 class="my-3">لیست وبینارها</h3>
+        <h3 class="my-3">لیست وبینارهای ایجاد شده توسط من</h3>
 
     </div>
 </div>

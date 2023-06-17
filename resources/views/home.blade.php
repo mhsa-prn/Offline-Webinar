@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="my-3">وبینارهای من</h3>
+    <h3 class="my-3">وبینارهای ثبت نام شده</h3>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mt-3">
         @if(collect($webinars)->count() > 0)
             @foreach($webinars as $webinar)

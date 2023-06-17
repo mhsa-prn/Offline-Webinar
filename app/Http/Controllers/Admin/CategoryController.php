@@ -33,7 +33,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|unique:categories,names',
+            'name'=>'required|unique:categories,name',
             'parent_id'=>'nullable|exists:categories,id'
         ]);
 

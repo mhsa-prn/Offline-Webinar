@@ -33,7 +33,7 @@
                             <lable for="">والد</lable>
                             <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
                                 <option value="{{null}}">بدون والد</option>
-                                @foreach(\App\Models\Category::all() as $cat)
+                                @foreach(\App\Models\Category::where('parent_id',null)->get() as $cat)
                                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                                 @endforeach
                             </select>
