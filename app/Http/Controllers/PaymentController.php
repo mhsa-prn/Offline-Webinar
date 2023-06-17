@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Price;
+use App\Models\User;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use mysql_xdevapi\Exception;
@@ -47,9 +48,26 @@ class PaymentController extends Controller
             ]);
             $webinar = Webinar::find($payment->webinar_id);
 
+            //payment is for membership
             if ($payment->forMemberSheep) {
+                $percent = Price::first()->percent;
+                $adminGet = $webinar->price * ($percent / 100);
+                $webinarCreatorGet = $webinar->price - $adminGet;
+                $adminUser = User::Where('is_admin', true)->first();
+                $adminUser->update([
+                    'wallet' => $adminUser->wallet + $adminGet
+                ]);
+                $webinarCreatorUser = User::find($webinar->creator_id);
+                $webinarCreatorUser->update([
+                    'wallet' => $webinarCreatorUser->wallet + $webinarCreatorGet
+                ]);
                 $webinar->members()->sync($request->user()->id);
             } else {
+                // payment is for creating webinar
+                $adminUser = User::Where('is_admin', true)->first();
+                $adminUser->update([
+                    'wallet' => $adminUser->wallet + $payment->amount
+                ]);
                 $webinar->update([
                     'confirmed' => true
                 ]);
@@ -57,7 +75,7 @@ class PaymentController extends Controller
 
 
             if ($payment->forMemberSheep) {
-                return redirect(route('webinars.show',$webinar->id));
+                return redirect(route('webinars.show', $webinar->id));
             }
 
             return redirect(route('webinars.index'))->with(['success' => 'پرداخت شما با موفقیت انجام شد.']);

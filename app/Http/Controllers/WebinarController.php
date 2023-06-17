@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,8 @@ class WebinarController extends Controller
      */
     public function create()
     {
-        return view('webinars.create');
+        $categories=Category::all();
+        return view('webinars.create',compact('categories'));
     }
 
     /**
@@ -43,7 +45,8 @@ class WebinarController extends Controller
             'description' => 'required|min:10|max:1000',
             'price' => 'required|numeric|min:0|max:10000000',
             'img' => 'required|mimes:jpg,png',
-            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'
+            'video' => 'required|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
+            'category_id'=>'required|exists:categories,id'
         ]);
 
         $image_name = Str::uuid() . '.' . $request->file('img')->getClientOriginalExtension();
@@ -55,6 +58,7 @@ class WebinarController extends Controller
             'price' => $request->price,
             'img' => $image_name,
             'video' => $video_name,
+            'category_id' => $request->category_id
         ]);
 
         Storage::disk('public')->putFileAs('images', $request->file('img'), $image_name);
