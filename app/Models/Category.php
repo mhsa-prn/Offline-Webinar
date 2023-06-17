@@ -20,5 +20,14 @@ class Category extends Model
         return Category::where('id',$this->parent_id)->first();
     }
 
+    public function webinars()
+    {
+        return $this->hasMany(Webinar::class);
+    }
+
+    public function child()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
 
 }

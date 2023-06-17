@@ -15,7 +15,8 @@ class Webinar extends Model
         'price',
         'video',
         'img',
-        'confirmed'
+        'confirmed',
+        'category_id'
     ];
 
     public function user()
@@ -31,5 +32,10 @@ class Webinar extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

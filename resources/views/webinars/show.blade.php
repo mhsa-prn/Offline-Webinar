@@ -13,9 +13,15 @@
                 <h4 class="text-danger">{{$webinar->price}} تومان</h4>
             @endif
             <h6>ارائه دهنده: {{$webinar->user->name}} </h6>
+                <h6>دسته بندی: {{$webinar->category->name}} </h6>
             <h6>تاریخ انتشار: {{jdate($webinar->created_at)->format('d-m-Y')}} </h6>
-            <h6 style="text-align: ju">{{$webinar->description}}</h6>
-            @if(!$webinar->members->contains(auth()->user()))
+            <h6 style="text-align: justify">{{$webinar->description}}</h6>
+            @if($webinar->members->contains(auth()->user()) || $webinar->creator_id==auth()->id())
+
+                    <a href="{{URL::temporarySignedRoute(
+    'webinars.download', now()->addMinutes(30), ['user'=>auth()->id(),'path'=>"/videos/{$webinar->video}"]
+)}}" class="btn btn-success btn-sm">لینک دانلود</a>
+            @else
                 @if($webinar->price ==0 )
                     <a href="{{route('webinar.free.register',$webinar->id)}}" class="btn btn-sm btn-danger">ثبت نام
                         رایگان</a>
@@ -23,8 +29,6 @@
                     <a href="{{route('payment.pay',['for'=>'membership','webinar'=>$webinar])}}" class="btn btn-sm
                     btn-danger">ثبت نام</a>
                 @endif
-            @else
-                <a href="" class="btn btn-success btn-sm">لینک دانلود</a>
             @endif
         </div>
     </div>

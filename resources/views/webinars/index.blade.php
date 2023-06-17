@@ -56,10 +56,9 @@
                             </td>
                             <td> {{ $webinar->price }}</td>
                             <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
-                            <td> <a
-                                    href="{{URL::temporarySignedRoute(
+                            <td> <a href="{{URL::temporarySignedRoute(
     'webinars.download', now()->addMinutes(30), ['user'=>auth()->id(),'path'=>"/videos/{$webinar->video}"]
-);}}"
+)}}"
                                     class="btn btn-sm btn-primary">لینک دانلود</a></td>
                             <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>
                             <td>

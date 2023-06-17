@@ -15,11 +15,14 @@
                         @if($webinar->price == 0)
                             <h4 class="text-success">رایگان</h4>
                         @else
-                            <h4 class="text-danger">{{$webinar->price}}تومان</h4>
+                            <h4 class="text-danger">{{$webinar->price}} تومان</h4>
                         @endif
                     </h1>
                     <img height="100px" width="100%" class="mb-3" src="/storage/images/{{$webinar->img}}">
                     <h6>ارائه دهنده: {{$webinar->user->name}} </h6>
+
+                    <h6>دسته بندی: {{$webinar->category->name}} </h6>
+
                     <h6>تاریخ انتشار: {{jdate($webinar->created_at)->format('d-m-Y')}} </h6>
                     <a href="{{route('webinars.show',$webinar->id)}}" type="button" class="w-100 btn btn-lg
                     btn-outline-primary">مشاهده</a>

@@ -31,6 +31,7 @@
                         <th>ردیف</th>
                         <th>عنوان</th>
                         <th>سازنده</th>
+                        <th>دسته بندی</th>
                         <th>قیمت</th>
                         <th>عکس</th>
                         <th>ویدئو</th>
@@ -44,6 +45,7 @@
                             <td> {{ $loop->index + 1 }}</td>
                             <td> {{ $webinar->title }}</td>
                             <td> {{ $webinar->user->name }}</td>
+                            <td> {{ $webinar->category->name }}</td>
                             <td> {{ $webinar->price }}</td>
                             <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
                             <td> <a href="{{route('admin.webinars.download',$webinar->video)}}" class="btn btn-sm btn-primary">لینک دانلود</a></td>

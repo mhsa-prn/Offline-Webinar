@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Category::class)->constrained();
             $table->string('title');
             $table->text('description');
             $table->integer('price');
