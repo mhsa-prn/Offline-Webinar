@@ -35,6 +35,6 @@ Route::get('/webinar/download/{user}','WebinarController@download')->name('webin
 
 Route::get('webinar/{webinar}', 'WebinarController@freeRegister')->name('webinar.free.register');
 
-//Route::get('/categories/{category}','CategoryController@show')->name('categories.show');
+Route::get('/categories/{category}','CategoryController@show')->name('categories.show');
 
 

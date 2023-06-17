@@ -107,14 +107,13 @@
 
                         @foreach(\App\Models\Category::where('parent_id',null)->get() as $category)
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="{{ route('categories.show',$category->id) }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ $category->name }}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('categories.show',$category->id) }}">{{ $category->name }}</a></li>
                                     @foreach($category->child as $child)
-                                        <li><a class="dropdown-item" href="#">{{ $child->name }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('categories.show',$child->id) }}">{{ $child->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
