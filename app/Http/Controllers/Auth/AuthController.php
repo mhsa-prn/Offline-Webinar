@@ -34,19 +34,7 @@ class AuthController extends Controller
             ];
             Mail::to($user)->send(new SendCodeMail($data));
         }else{
-            $user=User::create([
-                'email' => $request->email
-            ]);
-            $user->code()->delete();
-            $user->code()->create([
-                'code' => $code,
-                'expired_at' => Carbon::now() -> addMinutes (2)
-            ]);
-            $data=[
-                'title'=> 'رمز عبور یکبار مصرف',
-                'code'=> $code
-            ];
-            Mail::to($user)->send(new SendCodeMail($data));
+            return redirect('/register');
 
         }
         return redirect(route('login',['email'=> $user->email]));
