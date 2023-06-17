@@ -9,6 +9,12 @@
     <div class="col mb-3">
         <h3 class="my-3">لیست وبینارهای ایجاد شده توسط من</h3>
 
+        @if ($wallet == null)
+            <h6> مبلغ کیف پول من: 0 تومان</h6>
+        @else
+            <h6>مبلغ کیف پول من: {{$wallet}}
+                تومان</h6>
+        @endif
     </div>
 </div>
 <div class="row">

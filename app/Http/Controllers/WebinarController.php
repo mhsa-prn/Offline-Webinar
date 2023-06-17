@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,8 @@ class WebinarController extends Controller
     public function index(Request $request)
     {
         $webinars = $request->user()->webinars()->paginate(10);
-        return view('webinars.index', compact('webinars'));
+        $wallet=$request->user()->wallet;
+        return view('webinars.index', compact('webinars','wallet'));
     }
 
     /**
