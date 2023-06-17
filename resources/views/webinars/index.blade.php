@@ -73,7 +73,7 @@
                                     @method('delete')
                                 </form>
                                 <a href="#" onclick="event.preventDefault();askForDelete({{$webinar->id}})" class="btn btn-sm btn-danger">حذف</a>
-                                <a href="{{route('admin.webinars.edit',$webinar->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
+                                <a href="{{route('webinars.edit',$webinar->id)}}" class="btn btn-sm btn-primary">ویرایش</a>
                             </td>
                         </tr>
                     @endforeach
