@@ -9,30 +9,43 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Console\Input\Input;
 
 class AuthController extends Controller
 {
     public function getCode(Request $request)
     {
         $request->validate([
-            'email' => 'email'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
+
+        {
+            // The passwords match...
+        }
         $code=rand(10000,99999);
 
         $user=User::where('email',$request->email)->first();
         if($user){
-            $user->code()->delete();
-            $user->code()->create([
-                'code' => $code,
-                'expired_at' => Carbon::now() -> addMinutes (2)
-            ]);
-            $data=[
-                'title'=> 'رمز عبور یکبار مصرف',
-                'code'=> $code
-            ];
-            Mail::to($user)->send(new SendCodeMail($data));
+            if (Hash::check($request->password, $user->password)){
+                $user->code()->delete();
+                $user->code()->create([
+                    'code' => $code,
+                    'expired_at' => Carbon::now() -> addMinutes (2)
+                ]);
+                $data=[
+                    'title'=> 'رمز عبور یکبار مصرف',
+                    'code'=> $code
+                ];
+                Mail::to($user)->send(new SendCodeMail($data));
+            }
+            else{
+                return redirect(route('getCode'))->with(['error' => 'پسورد شما اشتباه است']);
+            }
+
         }else{
             return redirect('/register');
 
