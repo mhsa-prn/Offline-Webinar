@@ -11,19 +11,23 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
 
 
         $key = $request->search;
-        if ($key){
-            $users = User::where('name','like',"%{$key}%")
-                ->orWhere('email','like',"%{$key}%")->paginate(10);
+        if ($key) {
+
+            $users = User::where('is_admin', 0)
+                ->where(function ($query) use ($key) {
+                    $query->where('name', 'like', "%{$key}%");
+                    $query->orWhere('email', 'like', "%{$key}%");
+                })->paginate(10);
         }
         else {
-            $users = User::latest()->paginate(10);
+            $users = User::latest()->where('is_admin',0)->paginate(10);
         }
         return view('admin.users.index', compact ('users'));
     }
