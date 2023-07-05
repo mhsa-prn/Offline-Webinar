@@ -76,7 +76,7 @@ class AuthController extends Controller
             if($user->isAdmin()){
                 return redirect(route('admin.users.index'));
             }
-            return redirect(route('home'));
+            return redirect('/');
         }
         return back()->with('error','کد وارد شده معتبر نمی باشد');
     }
