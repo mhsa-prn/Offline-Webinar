@@ -32,7 +32,11 @@ class HomeController extends Controller
     {
         $key= request()->search;
         if($key){
-            $webinars= Webinar::where('confirmed',1)->where('title','like',"%{$key}%")->latest()->paginate(10);
+
+            $webinars = Webinar::where('confirmed',1)
+                ->where(function ($query) use ($key){
+                    $query->where('title','like',"%{$key}%");
+                })->latest()->paginate(10);
         }
         else{
             $webinars= Webinar::where('confirmed',1)->latest()->paginate(10);

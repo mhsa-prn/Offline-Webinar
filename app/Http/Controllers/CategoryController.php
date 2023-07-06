@@ -9,7 +9,13 @@ class CategoryController extends Controller
 {
     public function show(Category $category)
     {
-        $webinars = $category->webinars;
-        return view('categories.show',compact('webinars'));
+        //$webinars = $category->webinars;
+
+        $categories = Category::with('webinars')->whereHas('webinars', function ($query) use($category) {
+            $query->where('confirmed', '=', 1);
+            $query->where('id','=',$category->id);
+        })->get();
+
+        return view('categories.show',compact('categories'));
     }
 }

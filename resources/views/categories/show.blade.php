@@ -4,8 +4,8 @@
     @include('site-title')
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        @if(collect($webinars)->count() > 0)
-            @foreach($webinars as $webinar)
+        @if(isset($categories[0]->webinars))
+            @foreach($categories[0]->webinars as $webinar)
             <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-header py-3">
