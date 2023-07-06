@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
     <h3 class="my-3">افزودن وبینار جدید</h3>
     <form action="{{route('admin.webinars.store')}}" enctype="multipart/form-data" method="post">
         @csrf

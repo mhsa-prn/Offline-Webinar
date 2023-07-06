@@ -1,21 +1,26 @@
-@extends('admin.layouts')
+@extends('layouts.app')
 @section('title')
-    لیست کاربران
+    ویرایش اطلاعات کاربری
 @endsection
 
 @section('content')
 
+<div class="row">
+    <div class="col my-3">
+        <h4>ویرایش اطلاعات کاربری</h4>
+    </div>
+</div>
     <div class="row">
         <div class="col my-3">
-            <form action="{{route('admin.users.update', $user->id)}}" method="post">
+            <form method="post" action="{{route('users.update', auth()->id())}}">
                 @csrf
-                @method('patch')
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col my-3">
-                            <label>نام</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}}">
+                            <lable for="">نام</lable>
+                            <input type="text" class="form-control  @error('name') is-invalid @enderror"
+                                   name="name" value="{{$user->name}}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,8 +33,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col my-3">
-                            <label>ایمیل</label>
-                            <input type="text" class="form-control" disabled value="{{$user->email}}">
+                            <lable for="">ایمیل</lable>
+                            <input type="text" class="form-control"
+                                   name="title" value="{{$user->email}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -37,7 +43,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col my-3">
-                            <button class="btn btn-sm btn-primary" type="submit">بروزرسانی</button>
+                            <button type="submit" class="btn btn-sm btn-primary">ویرایش</button>
                         </div>
                     </div>
                 </div>
@@ -45,4 +51,5 @@
             </form>
         </div>
     </div>
-@endsection
+
+    @endsection

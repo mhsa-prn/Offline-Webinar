@@ -38,4 +38,7 @@ Route::get('webinar/{webinar}', 'WebinarController@freeRegister')->name('webinar
 
 Route::get('/categories/{category}','CategoryController@show')->name('categories.show');
 
+Route::get('/users/edit/','UserController@edit')->name('users.edit');
+Route::post('/users/{user}','UserController@update')->name('users.update');
+
 

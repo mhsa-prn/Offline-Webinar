@@ -102,7 +102,11 @@
                             <a class="nav-link active" aria-current="page" href="/">خانه</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/home">پروفایل</a>
+                            @if(!auth()->user()->isAdmin())
+                                <a class="nav-link active" aria-current="page" href="/home">پروفایل</a>
+                            @else
+                                <a class="nav-link active" aria-current="page" href="/admin/users">پنل ادمین</a>
+                            @endif
                         </li>
 
 

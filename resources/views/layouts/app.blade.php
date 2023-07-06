@@ -61,6 +61,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users.edit') }}">
+                                        ویرایش اطلاعات کاربری
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('webinars.index') }}">
                                         وبینارهای ایجاد شده ی من
                                     </a>
