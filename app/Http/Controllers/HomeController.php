@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 
@@ -32,10 +33,11 @@ class HomeController extends Controller
     {
         $key= request()->search;
         if($key){
-
+            $ids=User::where('name','like',"%{$key}%")->get('id');
             $webinars = Webinar::where('confirmed',1)
-                ->where(function ($query) use ($key){
+                ->where(function ($query) use ($key,$ids){
                     $query->where('title','like',"%{$key}%");
+                    $query->orWhereIn('creator_id',$ids);
                 })->latest()->paginate(10);
         }
         else{
