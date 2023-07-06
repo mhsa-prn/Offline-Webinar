@@ -40,6 +40,12 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col my-3">
+                        <a class="btn btn-link" href="{{ route('password.request') }}">تغییر رمز عبور</a>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col my-3">
