@@ -90,6 +90,8 @@
             </div>
         </main>
     </div>
+    <script src="/js/sweetalert.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
+@yield('script')
 </body>
 </html>

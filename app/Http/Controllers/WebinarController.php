@@ -114,11 +114,12 @@ class WebinarController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Webinar $webinar
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Webinar $webinar)
     {
-        //
+        $webinar->delete();
+        return back();
     }
 
     public function download(Request $request)

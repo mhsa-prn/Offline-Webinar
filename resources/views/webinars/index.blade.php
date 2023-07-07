@@ -90,7 +90,7 @@
         function askForDelete(id){
             Swal.fire({
                 title: '',
-                text: "آیا از حذف کاربر اطمینان دارید؟",
+                text: "آیا از حذف وبینار اطمینان دارید؟",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -108,3 +108,6 @@
 
     </script>
     @endsection
+
+
+

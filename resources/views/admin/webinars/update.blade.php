@@ -55,12 +55,7 @@
                     <div class="row">
                         <div class="col my-3">
                             <lable for="">قیمت وبینار</lable>
-                            <input type="text" class="form-control  @error('price') is-invalid @enderror" name="price" value="{{$webinar->price}}">
-                            @error('price')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
+                            <input type="text" class="form-control" name="price" value="{{$webinar->price}}" disabled>
                         </div>
                     </div>
                 </div>

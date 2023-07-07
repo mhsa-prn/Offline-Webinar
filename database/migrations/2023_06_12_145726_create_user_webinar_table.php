@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_webinar', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
-            $table->foreignIdFor(\App\Models\Webinar::class)->constrained();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(\App\Models\Webinar::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->primary(['user_id','webinar_id']);
         });
     }

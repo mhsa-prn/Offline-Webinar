@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -43,8 +44,18 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+
+        $ids=Category::whereNotNull('parent_id')->get('parent_id');
+
+        foreach ($ids as $id){
+            if($id->parent_id == $category->id){
+                return redirect(route('admin.categories.index'))->with(['error' => 'دسته بندی مورد نظر دارای دسته بندی می باشد . قابل حذف نیست']);
+
+            }
+        }
         $category->delete();
         return back();
+
     }
 
     public function edit(Category $category)

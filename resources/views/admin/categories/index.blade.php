@@ -22,6 +22,15 @@
         </form>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+        @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{session('error')}}
+            </div>
+        @endif
+    </div>
+</div>
     <div class="row">
         <div class="col">
             <div class="table-responsive">
@@ -65,7 +74,7 @@
         function askForDelete(id){
             Swal.fire({
                 title: '',
-                text: "آیا از حذف کاربر اطمینان دارید؟",
+                text: "آیا از حذف دسته بندی اطمینان دارید؟",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

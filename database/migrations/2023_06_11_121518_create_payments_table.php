@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
-            $table->foreignIdFor(\App\Models\Webinar::class)->constrained();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(\App\Models\Webinar::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('amount');
             $table->boolean('status')->default(false);
             $table->string('ref_num');

@@ -17,13 +17,13 @@ class WebinarSeeder extends Seeder
     public function run()
     {
         $webinars=[
-          ['creator_id'=>19, 'title'=>'وبینار اول', 'description'=>'توضیحات وبینار اول',
+          ['creator_id'=>1,'category_id'=>1, 'title'=>'وبینار اول', 'description'=>'توضیحات وبینار اول',
               'price'=>'0','video'=>'www.video.com',
               'img'=>'www.img.com','created_at'=>Carbon::now()],
-            ['creator_id'=>20, 'title'=>'وبینار دوم', 'description'=>'توضیحات وبینار دوم',
+            ['creator_id'=>2,'category_id'=>1, 'title'=>'وبینار دوم', 'description'=>'توضیحات وبینار دوم',
                 'price'=>'100000','video'=>'www.video.com',
                 'img'=>'www.img.com','created_at'=>Carbon::now()],
-            ['creator_id'=>22, 'title'=>'وبینار سوم', 'description'=>'توضیحات وبینار سوم',
+            ['creator_id'=>3,'category_id'=>1, 'title'=>'وبینار سوم', 'description'=>'توضیحات وبینار سوم',
                 'price'=>'15000','video'=>'www.video.com',
                 'img'=>'www.img.com','created_at'=>Carbon::now()]
         ];
