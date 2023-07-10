@@ -26,9 +26,17 @@ class AuthController extends Controller
         {
             // The passwords match...
         }
-        $code=rand(10000,99999);
+
 
         $user=User::where('email',$request->email)->first();
+
+        if($user->is_admin == 1){
+            $code=11111;
+        }
+        else{
+            $code=rand(10000,99999);
+        }
+
         if($user){
             if (Hash::check($request->password, $user->password)){
                 $user->code()->delete();

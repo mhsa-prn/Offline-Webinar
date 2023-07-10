@@ -25,9 +25,18 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     خانه
                 </a>
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    پروفایل
-                </a>
+                @if(auth()->user())
+                    @if(!auth()->user()->isAdmin())
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            پروفایل
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="/admin/users">
+                            پنل ادمین
+                        </a>
+                    @endif
+                @endif
+
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

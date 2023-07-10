@@ -33,6 +33,7 @@
                         <th>سازنده</th>
                         <th>دسته بندی</th>
                         <th>قیمت</th>
+                        <th>وضعیت پرداخت</th>
                         <th>عکس</th>
                         <th>ویدئو</th>
                         <th>تاریخ انتشار</th>
@@ -47,6 +48,13 @@
                             <td> {{ $webinar->user->name }}</td>
                             <td> {{ $webinar->category->name }}</td>
                             <td> {{ $webinar->price }}</td>
+                            <td>
+                                @if($webinar->confirmed)
+                                    <span class="text-success">پرداخت شده</span>
+                                @else
+                                    <span class="text-danger">پرداخت شده</span>
+                                @endif
+                            </td>
                             <td style="text-align: center"> <img src="{{env('APP_URL').'/storage/images/'.$webinar->img}}" width="200px" height="100px" /></td>
                             <td> <a href="{{route('admin.webinars.download',$webinar->video)}}" class="btn btn-sm btn-primary">لینک دانلود</a></td>
                             <td> {{ jdate($webinar->created_at)->format('Y-m-d') }}</td>

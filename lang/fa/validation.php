@@ -44,7 +44,7 @@ return [
     'distinct'         => ':attribute مقدار تکراری دارد.',
     "email"            => "فرمت :attribute معتبر نیست.",
     'ends_with'        => ':attribute باید با این مقدار تمام شود: :values.',
-    "exists"           => ":attribute انتخاب شده، معتبر نیست.",
+    "exists"           => ":attribute وارد شده، معتبر نیست.",
     'file' 	       => 'فیلد :attribute باید فایل باشد.',
     "filled"           => "فیلد :attribute الزامی است",
     'gt' => [

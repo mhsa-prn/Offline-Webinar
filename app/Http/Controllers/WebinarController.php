@@ -54,13 +54,21 @@ class WebinarController extends Controller
         $image_name = Str::uuid() . '.' . $request->file('img')->getClientOriginalExtension();
         $video_name = Str::uuid() . '.' . $request->file('video')->getClientOriginalExtension();
 
+        if($request->price == 0){
+            $confirmed=1;
+        }
+        else{
+            $confirmed=0;
+        }
+
         $request->user()->webinars()->create([
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
             'img' => $image_name,
             'video' => $video_name,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'confirmed'=>$confirmed
         ]);
 
         Storage::disk('public')->putFileAs('images', $request->file('img'), $image_name);
@@ -84,7 +92,7 @@ class WebinarController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Webinar $webinar
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Webinar $webinar)
     {
@@ -96,17 +104,24 @@ class WebinarController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Webinar $webinar
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Webinar $webinar)
     {
+
         $request->validate([
             'title'=>'required|min:5|max:50',
             'description'=>'required|min:10|max:1000',
-            'price'=>'required|numeric|min:0|max:10000000',
+            'category_id' => 'required'
         ]);
 
-        $webinar->update($request->all());
+        $new_webinar=Webinar::find($webinar->id);
+
+        $new_webinar->title = $request->title;
+        $new_webinar->description = $request->description;
+        $new_webinar->category_id = $request->category_id;
+        $new_webinar->save();
+
         return redirect(route('webinars.index'));
     }
 

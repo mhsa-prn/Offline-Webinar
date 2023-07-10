@@ -7,6 +7,7 @@
                 @endif
             <h4 class="my-3 fw-normal">{{$webinar->title}}</h4>
             <img height="300px" width="100%" class="mb-3" src="/storage/images/{{$webinar->img}}">
+                
             @if($webinar->price == 0)
                 <h4 class="text-success">رایگان</h4>
             @else

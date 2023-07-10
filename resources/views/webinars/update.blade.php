@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
 <div class="row">
     <div class="col my-3">
         <h4>ویرایش وبینار</h4>
@@ -11,9 +12,10 @@
 </div>
     <div class="row">
         <div class="col my-3">
-            <form method="post" action="{{route('webinars.update', $webinar->id)}}">
+            <form action="{{route('webinars.update', $webinar->id)}}" method="post" name="f">
                 @csrf
-                @method('put')
+                @method('patch')
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col my-3">
@@ -65,18 +67,17 @@
                     <div class="row">
                         <div class="col">
                             <lable for="">دسته بندی</lable>
-                            <select class="form-control @error('category_id') is-invalid @enderror" type="text" name="category_id">
+                            <select class="form-control" type="text" name="category_id">
                                 @foreach(\App\Models\Category::all() as $category)
-                                    <option value="{{$category->id}}">
-                                        {{$category->name}}
-                                    </option>
+
+                                    @if ($webinar->category_id == $category->id)
+                                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
                                 @endforeach
+
                             </select>
-                            @error('category_id')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                     </div>
                 </div>
