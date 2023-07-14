@@ -44,6 +44,7 @@ class PaymentController extends Controller
         $transaction_id = $request->Authority;
         $payment = Payment::where('ref_num', $transaction_id)->first();
         if (!$payment) throw new \Exception('وبینار پیدا نشد');
+        $webinar = Webinar::find($payment->webinar_id);
         try {
             $receipt = ShetabitPayment::amount($payment->amount)->transactionId($transaction_id)->verify();
 
@@ -51,7 +52,7 @@ class PaymentController extends Controller
                 'res_num' => $receipt->getReferenceId(),
                 'status' => true
             ]);
-            $webinar = Webinar::find($payment->webinar_id);
+
 
             //payment is for membership
             if ($payment->forMemberSheep) {
@@ -86,6 +87,9 @@ class PaymentController extends Controller
             return redirect(route('webinars.index'))->with(['success' => 'پرداخت شما با موفقیت انجام شد.']);
 
         } catch (InvalidPaymentException $exception) {
+            if($payment->forMemberSheep){
+                return redirect(route('webinars.show',$webinar->id))->with(['error' => $exception->getMessage()]);
+            }
             return redirect(route('webinars.index'))->with(['error' => $exception->getMessage()]);
         }
     }

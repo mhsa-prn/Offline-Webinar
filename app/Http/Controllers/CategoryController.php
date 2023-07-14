@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
         $categories = Category::with('webinars')->whereHas('webinars', function ($query) use($category) {
             $query->where('confirmed', '=', 1);
-            $query->where('id','=',$category->id);
+            $query->where('category_id','=',$category->id);
         })->get();
 
         return view('categories.show',compact('categories'));
